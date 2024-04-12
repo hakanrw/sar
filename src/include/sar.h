@@ -19,7 +19,7 @@ struct sar_meta
   char author[32];    /* 16 */
   uint64_t time;      /* 48 */
   double latitude;    /* 56 */
-  double longitude;  /* 64 */
+  double longitude;   /* 64 */
                       /* 72 */
 };
 

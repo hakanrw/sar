@@ -31,9 +31,11 @@ $(LIB): $(OBJS)
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/sar.h
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/sar.h $(OBJ_DIR)
 	$(CC) $(CFLAGS) -fPIC -c -o $@ $<
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 $(SAR): $(CLI_DIR)/sar.c $(INCLUDE_DIR)/sar.h
 	$(CC) $(CFLAGS) -L$(BUILD_DIR) -lsar -Wl,-rpath=/usr/local/lib64 -o $@ $<

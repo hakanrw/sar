@@ -29,7 +29,7 @@ all: $(LIB) $(SAR) $(UNSAR)
 
 $(LIB): $(OBJS)
 	mkdir -p $(BUILD_DIR)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/sar.h $(OBJ_DIR)
 	$(CC) $(CFLAGS) -fPIC -c -o $@ $<
@@ -38,10 +38,10 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(SAR): $(CLI_DIR)/sar.c $(INCLUDE_DIR)/sar.h
-	$(CC) $(CFLAGS) -L$(BUILD_DIR) -lsar -Wl,-rpath=/usr/local/lib64 -o $@ $<
+	$(CC) $(CFLAGS) -L$(BUILD_DIR) -Wl,-rpath=/usr/local/lib64 -o $@ $< -lsar
 
 $(UNSAR): $(CLI_DIR)/unsar.c $(INCLUDE_DIR)/sar.h
-	$(CC) $(CFLAGS) -L$(BUILD_DIR) -lsar -Wl,-rpath=/usr/local/lib64 -o $@ $<
+	$(CC) $(CFLAGS) -L$(BUILD_DIR) -Wl,-rpath=/usr/local/lib64 -o $@ $< -lsar
 
 
 clean:
